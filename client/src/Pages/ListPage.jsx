@@ -1,37 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 
 const ListPage = () => {
 
+  const [messages, setMessages] = useState([]);
 
-axios.defaults.baseURL = process.env.API_URL || 'http://localhost:5000';
+  async function fetchData() {
+    const url = 'http://localhost:5000';
 
-const fetchMessages = async () => {
-  const response = await axios.get('/');
-  console.log('fetchMessages', response.data);
-  if (response.status === 200) {
-    return response.data;
-  }
-  return [];
-};
+    await fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        setMessages(data);
+      })
+  };
 
-/* const [messages, setMessages] = useState([]);
-
-  const loadMessages = async () => {
-    let getMessages = await fetchMessages();
-    console.log('Got new message:', getMessages);
-    setMessages(getMessages);
-  }; */
 
   useEffect(() => {
-    //loadMessages();
-    fetchMessages();
+    fetchData();
   }, []);
 
   return (
     <div>
       List page
+      <p>
+      {messages}
+      </p>
       <ul>
         <Link to="/1">
             Lista 1
