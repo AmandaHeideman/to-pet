@@ -4,7 +4,7 @@ import ListPage from './Pages/ListPage';
 function App() {
   return (
     <Switch>
-      <Route path="/list" component={ListPage} />
+      <Route path="/" component={ListPage} />
     </Switch>
   );
 }
