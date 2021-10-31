@@ -26,6 +26,14 @@ const ListPage = () => {
       List page
       <p>
       {messages}
+      {/* messages mappas igenom, varje value genererar en li med länk till /:id */}
+      {/* 
+      <ul>
+      messages.map((value, key) => {
+        return <Link to="/:value.id">value.title</Link>
+      })
+      </ul>
+       */}
       </p>
       <ul>
         <Link to="/1">
