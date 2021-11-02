@@ -1,4 +1,4 @@
-const Products = require("../models/ListModel");
+/* const lists = require("../models/ListModel");
 
 const getAllLists = async (req, res) => {
   try {
@@ -11,4 +11,4 @@ const getAllLists = async (req, res) => {
 
 module.exports = {
   getAllLists
-};
+}; */
