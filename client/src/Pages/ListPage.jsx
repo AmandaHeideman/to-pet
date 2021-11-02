@@ -11,7 +11,8 @@ const ListPage = () => {
   function getAllLists() { //innan något visas på sidan så kommer den här att köras. här kommer grejer hämtas från db
     axios.get('http://localhost:5000/') //Det här är bara för att välja user som redan finns i databas
       .then(response => {
-        console.log(response)
+        //console.log(response.data)
+        setLists(response.data)
       })
       .catch((error) => {
         console.log(error);
@@ -44,7 +45,14 @@ const ListPage = () => {
     <div>
       List page
       <p>
-        {lists}
+        {JSON.stringify(lists[0].title)}
+
+        {lists.map((value, key) => {
+          return <p> {value} </p>
+        })
+
+        }
+
         {/* messages mappas igenom, varje value genererar en li med länk till /:id */}
         {/* 
       <ul>
