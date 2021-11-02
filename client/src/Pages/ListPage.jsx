@@ -6,12 +6,9 @@ const ListPage = () => {
 
   const [lists, setLists] = useState([]);
 
-
-
-  function getAllLists() { //innan något visas på sidan så kommer den här att köras. här kommer grejer hämtas från db
-    axios.get('http://localhost:5000/') //Det här är bara för att välja user som redan finns i databas
+  function getAllLists() { 
+    axios.get('http://localhost:5000/')
       .then(response => {
-        //console.log(response.data)
         setLists(response.data)
       })
       .catch((error) => {
@@ -19,60 +16,23 @@ const ListPage = () => {
       })
   }
 
-
   useEffect(() => {
     getAllLists();
   }, []);
 
-  /* 
-    async function fetchData() {
-      const url = 'http://localhost:5000';
-  
-      await fetch(url)
-        .then(res => res.json())
-        .then(data => {
-          console.log(data);
-          setLists(data);
-        })
-    };
-  
-  
-    useEffect(() => {
-      fetchData();
-    }, []); */
-
   return (
     <div>
       List page
-      <p>
-        {JSON.stringify(lists[0].title)}
+        {lists ? (
+          lists.map((value) => {
+          return <>
+            <p><Link to={`/${value._id}`} list={value}> {value.title} </Link></p>
+            </>
+          })
 
-        {lists.map((value, key) => {
-          return <p> {value} </p>
-        })
-
+        ):
+          <h1>Loading...</h1>
         }
-
-        {/* messages mappas igenom, varje value genererar en li med länk till /:id */}
-        {/* 
-      <ul>
-      messages.map((value, key) => {
-        return <Link to="/:value.id">value.title</Link>
-      })
-      </ul>
-       */}
-      </p>
-      <ul>
-        <Link to="/1">
-          Lista 1
-        </Link>
-        <Link to="/2">
-          Lista 2
-        </Link>
-        <Link to="/3">
-          Lista 3
-        </Link>
-      </ul>
     </div>
   )
 }
