@@ -20,7 +20,7 @@ const ListDetailPage = (props) => {
 
 
   return (
-    <div>
+    <div className="container">
       <h1>{lists.title}</h1>
       <ul>
         {lists.items ? (

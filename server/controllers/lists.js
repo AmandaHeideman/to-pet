@@ -19,6 +19,15 @@ const getDetailList = async (req, res) => {
   }
 };
 
+/* const addList = async (req, res) => {
+  try{
+    const allLists = await Lists.find();
+    res.send("post");
+  } catch (err) {
+    res.status(404).json({message: err.message});
+  }
+}
+ */
 module.exports = {
   getAllLists,
   getDetailList

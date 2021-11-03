@@ -5,6 +5,7 @@ import axios from 'axios';
 const ListPage = () => {
 
   const [lists, setLists] = useState([]);
+  const [listTitle, setListTitle] = useState([]);
 
   function getAllLists() { 
     axios.get('http://localhost:5000/')
@@ -16,12 +17,23 @@ const ListPage = () => {
       })
   }
 
+
   useEffect(() => {
     getAllLists();
   }, []);
 
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    setListTitle(e.target[0].value);
+    axios.post('/', {
+      title: listTitle
+    })
+    .then(res => console.log(res))
+  }
+
+
   return (
-    <div>
+    <div className="container">
       List page
         {lists ? (
           lists.map((value) => {
@@ -33,6 +45,15 @@ const ListPage = () => {
         ):
           <h1>Loading...</h1>
         }
+
+      <form method="POST" onSubmit={handleOnSubmit}>
+        <div class="mb-3">
+          <label for="listTitle" class="form-label">Title</label>
+          <input type="text" class="form-control" id="listTitle" />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
     </div>
   )
 }

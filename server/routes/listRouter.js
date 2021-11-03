@@ -13,5 +13,11 @@ router.route('/').get((req, res) => {   //vår route, endpoint som tar emot get 
 router.get("/", getAllLists);
 router.get("/:id", getDetailList);
 
+//router.post("/", addList);
+
+router.route("/").post((req, res) => {
+  res.send("post")
+})
+
 module.exports = router;
 
