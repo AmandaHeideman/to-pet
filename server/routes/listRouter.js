@@ -7,7 +7,7 @@ const List = require('../models/ListModel')
 
 router.get("/", getAllLists);
 router.get("/:id", getDetailList);
-router.post("/:id", updateList);
+//router.post("/:id", updateList);
 
 //router.post("/", addList);
 
@@ -30,6 +30,29 @@ router.route("/").post((req, res) => {
     })
   })
 });
+
+
+router.route('/:id').post((req, res) => {
+  // now we know token is valid
+  List.findOne({ _id: req.params.id }, (err, list) => {
+    if (err) {
+      return console.log(err);
+    } else {
+      console.log('added to db?')
+
+      list.listItem.push('A NEW LIST ITEM');
+
+      list.save(error => {
+        if (error) return console.log(error)
+        //saved
+        return res.status(200).json({
+          title: 'success',
+
+        });
+      });
+    }
+  })
+})
 
 /* router.route("/:id").post((req, res) => {
   const id = req.params._id;

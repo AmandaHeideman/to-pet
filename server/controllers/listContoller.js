@@ -21,13 +21,13 @@ const getDetailList = async (req, res) => {
 
 const updateList = async (req, res) => {
   const id = req.params.id;
-  const {listItem} = req.body;
+  //const { listItem } = req.body;
   console.log("hallåå");
-  try{
-    Lists.findOneAndUpdate(
-      { _id: id, },
+  try {
+    Lists.findByIdAndUpdate(
+      id,
       {
-        $push: {listItem: "newListItem"}
+        listItem: "newListItem"
       }
     )
     console.log("???");
