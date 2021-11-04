@@ -37,16 +37,15 @@ const addListItem = async (req, res) => {
   })
 }
 
-const editList = async (req, res) => {
-  const newListItem = req.body.listItem;
+const deleteListItem = async (req, res) => {
+  const index = req.body.index;
   List.findOne({ _id: req.params.id }, (err, list) => {
     if (err) {
       return console.log(err);
     } else {
-      list.listItem.push(newListItem);
+      list.listItem.splice(index);
       list.save(error => {
         if (error) return console.log(error)
-        //saved
         return res.status(200).json({
           title: 'success'
         });
@@ -60,5 +59,5 @@ module.exports = {
   getAllLists,
   getDetailList,
   addListItem,
-  editList
+  deleteListItem
 };

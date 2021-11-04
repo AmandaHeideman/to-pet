@@ -26,8 +26,12 @@ const ListDetailPage = (props) => {
     getList();
   }, []);
 
-  const handleOnDelete = (item) => {
-    console.log(item)
+  const handleOnDelete = (key) => {
+    console.log(key)
+    url.post(`/${id}/delete`, {
+      index: key
+    })
+      .then(window.location.reload())
   }
 
   const handleOnSubmit = (e) => {
@@ -44,8 +48,8 @@ const ListDetailPage = (props) => {
       <h1>{lists.listTitle}</h1>
       <ul>
         {lists.listItem ? (
-          lists.listItem.map((item) => {
-            return <li>{item}  <input value="DONE" onClick={() => handleOnDelete(item)} type="button" className="py-2 px-3 bg-green-400 text-white rounded-md cursor-pointer" /></li>
+          lists.listItem.map((item, key) => {
+            return <li>{item}  <input value="DONE" onClick={() => handleOnDelete(key)} type="button" className="py-2 px-3 bg-green-400 text-white rounded-md cursor-pointer" /></li>
           })) : "no items"}
       </ul>
 
