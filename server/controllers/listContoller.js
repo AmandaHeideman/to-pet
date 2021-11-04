@@ -19,7 +19,25 @@ const getDetailList = async (req, res) => {
   }
 };
 
-const updateList = async (req, res) => {
+const addListItem = async (req, res) => {
+  const newListItem = req.body.listItem;
+  List.findOne({ _id: req.params.id }, (err, list) => {
+    if (err) {
+      return console.log(err);
+    } else {
+      list.listItem.push(newListItem);
+      list.save(error => {
+        if (error) return console.log(error)
+        //saved
+        return res.status(200).json({
+          title: 'success'
+        });
+      });
+    }
+  })
+}
+
+const editList = async (req, res) => {
   const newListItem = req.body.listItem;
   List.findOne({ _id: req.params.id }, (err, list) => {
     if (err) {
@@ -38,17 +56,9 @@ const updateList = async (req, res) => {
 }
 
 
-/* const addList = async (req, res) => {
-  try{
-    const allLists = await Lists.find();
-    res.send("post");
-  } catch (err) {
-    res.status(404).json({message: err.message});
-  }
-}
- */
 module.exports = {
   getAllLists,
   getDetailList,
-  updateList
+  addListItem,
+  editList
 };

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const url = axios.create({
@@ -7,14 +6,15 @@ const url = axios.create({
 });
 
 
-const ListPage = () => {
+
+const EditListPage = (props) => {
+  const id = props.match.params.id;
 
   const [lists, setLists] = useState([]);
-  const [listTitle, setListTitle] = useState("");
   const [listItem, setListItem] = useState([]);
 
-  function getAllLists() {
-    url.get('/')
+  function getList() {
+    url.get(`/${id}`)
       .then(response => {
         setLists(response.data)
       })
@@ -22,44 +22,32 @@ const ListPage = () => {
         console.log(error);
       })
   }
-
-
   useEffect(() => {
-    getAllLists();
+    getList();
   }, []);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
 
-    url.post('/', {
-      title: listTitle,
+    url.post(`/${id}`, {
       listItem: listItem
     })
       .then(window.location.reload())
   }
 
-
   return (
     <div className="container">
-      List page
-      {lists ? (
-        lists.map((value) => {
-          return <>
-            <p><Link to={`/${value._id}`} props={value}> {value.listTitle} </Link></p>
-          </>
-        })
-
-      ) :
-        <h1>Loading...</h1>
-      }
+      <h1>{lists.listTitle}</h1>
+      <ul>
+        {lists.listItem ? (
+          lists.listItem.map((item) => {
+            return <li>{item}</li>
+          })) : "no items"}
+      </ul>
 
       <form method="POST" onSubmit={handleOnSubmit}>
         <div class="mb-3">
-          <label for="listTitle" class="form-label">Title</label>
-          <input onChange={e => setListTitle(e.target.value)} type="text" class="form-control" id="listTitle" />
-        </div>
-        <div class="mb-3">
-          <label for="listItem" class="form-label">First item</label>
+          <label for="listItem" class="form-label">Add item</label>
           <input onChange={e => setListItem(e.target.value)} type="text" class="form-control" id="listItem" />
         </div>
 
@@ -71,4 +59,4 @@ const ListPage = () => {
   )
 }
 
-export default ListPage
+export default EditListPage;

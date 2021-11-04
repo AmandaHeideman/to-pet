@@ -1,13 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const { getAllLists, getDetailList, updateList } = require('../controllers/listContoller');
+const { getAllLists, getDetailList, addListItem, editList } = require('../controllers/listContoller');
 const mongoose = require('mongoose')
 const List = require('../models/ListModel')
 
 
 router.get("/", getAllLists);
 router.get("/:id", getDetailList);
-router.post("/:id", updateList);
+router.post("/:id", addListItem);
+router.post("/:id/edit", editList);
+
 
 //router.post("/", addList);
 

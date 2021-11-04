@@ -26,6 +26,10 @@ const ListDetailPage = (props) => {
     getList();
   }, []);
 
+  const handleOnDelete = (item) => {
+    console.log(item)
+  }
+
   const handleOnSubmit = (e) => {
     e.preventDefault();
 
@@ -41,7 +45,7 @@ const ListDetailPage = (props) => {
       <ul>
         {lists.listItem ? (
           lists.listItem.map((item) => {
-            return <li>{item}</li>
+            return <li>{item}  <input value="DONE" onClick={() => handleOnDelete(item)} type="button" className="py-2 px-3 bg-green-400 text-white rounded-md cursor-pointer" /></li>
           })) : "no items"}
       </ul>
 
@@ -50,8 +54,6 @@ const ListDetailPage = (props) => {
           <label for="listItem" class="form-label">Add item</label>
           <input onChange={e => setListItem(e.target.value)} type="text" class="form-control" id="listItem" />
         </div>
-
-
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
 
