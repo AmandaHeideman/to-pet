@@ -49,27 +49,33 @@ const ListPage = () => {
 
   return (
     <div className="container">
-      List page
-      {lists ? (
-        lists.map((value, key) => {
-          return <>
-            <p><Link to={`/${value._id}`} props={value}> {value.listTitle} </Link><input value="Delete" onClick={() => handleOnDelete(value._id)} type="button" /></p>
-          </>
-        })
+      <h1> All your Todo lists :) </h1>
+      <ul className="list-group">
+        {lists ? (
+          lists.map((value, key) => {
+            return <>
+              <li className="list-group-item">
+                <Link style={{ textDecoration: 'none' }} to={`/${value._id}`} props={value}>
+                  {value.listTitle}
+                </Link>
+                <input className="m-2 btn btn-outline-danger cursor-pointer" value="X" onClick={() => handleOnDelete(value._id)} type="button" />
+              </li>
+            </>
+          })
 
-      ) :
-        <h1>Loading...</h1>
-      }
+        ) :
+          <h1>Loading...</h1>
+        }</ul>
 
-      <form method="POST" onSubmit={handleOnSubmit}>
+      <form class="mt-4" method="POST" onSubmit={handleOnSubmit}>
         <div class="mb-3">
-          <label for="listTitle" class="form-label">Title</label>
+          <label for="listTitle" className="form-label">Create a new list</label>
           <input onChange={e => setListTitle(e.target.value)} type="text" class="form-control" id="listTitle" />
         </div>
-        <div class="mb-3">
-          <label for="listItem" class="form-label">First item</label>
+        {/*  <div class="mb-3">
+          <label for="listItem" className="form-label">First item</label>
           <input onChange={e => setListItem(e.target.value)} type="text" class="form-control" id="listItem" />
-        </div>
+        </div> */}
 
 
         <button type="submit" class="btn btn-primary">Submit</button>

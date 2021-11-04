@@ -29,8 +29,8 @@ const EditListPage = (props) => {
   const handleOnSubmit = (e) => {
     e.preventDefault();
     let newItemsArray = [];
-    
-    for(let i=0; i<e.target.length; i++){
+
+    for (let i = 0; i < e.target.length; i++) {
       newItemsArray.push(e.target[i].value);
     }
     newItemsArray.pop();
@@ -44,19 +44,21 @@ const EditListPage = (props) => {
   return (
     <div className="container">
       <h1>{lists.listTitle}</h1>
-        <form method="POST" onSubmit={handleOnSubmit}>
-      <ul>
-        {lists.listItem ? (
-          lists.listItem.map((item) => {
-            return <input defaultValue={item} placeholder={item}/>
-          })) : "no items"}
-      </ul>
+      <form method="POST" onSubmit={handleOnSubmit}>
+        <div className="list-group list-unstyled">
+          {lists.listItem ? (
+            lists.listItem.map((item) => {
+              return <div className=" mb-3">
+                <input classname="form-control" defaultValue={item} placeholder={item} />
+              </div>
+            })) : "no items"}
+        </div>
 
 
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
 
-    </div>
+    </div >
   )
 }
 

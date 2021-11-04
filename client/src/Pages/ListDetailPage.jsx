@@ -47,14 +47,19 @@ const ListDetailPage = (props) => {
   return (
     <div className="container">
       <h1>{lists.listTitle}</h1>
-      <ul>
+      <ul className="list-group">
         {lists.listItem ? (
           lists.listItem.map((item, key) => {
-            return <li>{item}  <input value="DONE" onClick={() => handleOnDelete(key)} type="button" className="py-2 px-3 bg-green-400 text-white rounded-md cursor-pointer" /></li>
+            return <li className="list-group-item">{item}
+              <input className="m-2 btn btn-outline-success cursor-pointer" value="DONE" onClick={() => handleOnDelete(key)}
+                type="button" /></li>
           })) : "no items"}
       </ul>
+      <Link to={`/${id}/edit`} style={{ textDecoration: 'none' }} className="mt-2 btn btn-primary cursor-pointer">
+        Edit list
+      </Link>
 
-      <form method="POST" onSubmit={handleOnSubmit}>
+      <form class="mt-4" method="POST" onSubmit={handleOnSubmit}>
         <div class="mb-3">
           <label for="listItem" class="form-label">Add item</label>
           <input onChange={e => setListItem(e.target.value)} type="text" class="form-control" id="listItem" />
@@ -62,7 +67,7 @@ const ListDetailPage = (props) => {
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
 
-      <Link to={`/${id}/edit`}>Edit list</Link>
+
 
     </div>
   )
