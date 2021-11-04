@@ -1,23 +1,36 @@
 const express = require('express');
 const router = express.Router();
-const { getAllLists, getDetailList } = require('../controllers/lists');
-//let List = require("../models/ListModel");
+const { getAllLists, getDetailList, updateList } = require('../controllers/listContoller');
+const mongoose = require('mongoose')
+const List = require('../models/ListModel')
 
-/* 
-router.route('/').get((req, res) => {   //vår route, endpoint som tar emot get på /user. 
-  List.find()    //kommer hämta alla users från vår databas, find returnerar ett promise 
-    .then(lists => res.json(lists))   //returnerar users 
-    .catch(err => res.status(400).json('Error: ' + err));
-}); */
 
 router.get("/", getAllLists);
 router.get("/:id", getDetailList);
+router.post("/:id", updateList);
 
 //router.post("/", addList);
 
 router.route("/").post((req, res) => {
-  res.send("post")
-})
+  const newList = new List({
+    listTitle: req.body.title,
+    listItem: req.body.listItem
+
+  })
+  console.log(newList);
+  newList.save(err => {
+    if (err) {
+      return res.status(400).json({
+        title: 'error',
+        error: 'Email already in use'
+      })
+    }
+    return res.status(200).json({
+      title: 'list successfully added'
+    })
+  })
+});
+
 
 module.exports = router;
 
