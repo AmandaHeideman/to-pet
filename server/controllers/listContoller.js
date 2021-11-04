@@ -54,6 +54,19 @@ const deleteListItem = async (req, res) => {
   })
 }
 
+const editList = async (req, res) => {
+  const items = req.body.listItems;
+  const id = req.params.id;
+  try {
+    List.findByIdAndUpdate(
+      id, { listItem: items }
+    )
+      .catch((err) => res.status(500).json({ msg: err.message }));
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+}
+
 const deleteList = async (req, res) => {
   const id = req.body.id;
   List.findOneAndDelete({ _id: id }, (err, list) => {
@@ -73,5 +86,6 @@ module.exports = {
   getDetailList,
   addListItem,
   deleteListItem,
-  deleteList
+  deleteList,
+  editList
 };

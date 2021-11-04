@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getAllLists, getDetailList, addListItem, deleteListItem, deleteList } = require('../controllers/listContoller');
+const { getAllLists, getDetailList, addListItem, deleteListItem, deleteList, editList } = require('../controllers/listContoller');
 const mongoose = require('mongoose')
 const List = require('../models/ListModel')
 
@@ -10,6 +10,7 @@ router.get("/", getAllLists);
 router.get("/:id", getDetailList);
 router.post("/:id", addListItem);
 router.post("/:id/delete", deleteListItem);
+router.post("/:id/edit", editList);
 
 
 //router.post("/", addList);

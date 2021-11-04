@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const url = axios.create({
@@ -60,6 +61,8 @@ const ListDetailPage = (props) => {
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
+
+      <Link to={`/${id}/edit`}>Edit list</Link>
 
     </div>
   )

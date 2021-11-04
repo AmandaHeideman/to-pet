@@ -28,28 +28,29 @@ const EditListPage = (props) => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
+    let newItemsArray = [];
+    
+    for(let i=0; i<e.target.length; i++){
+      newItemsArray.push(e.target[i].value);
+    }
+    newItemsArray.pop();
 
-    url.post(`/${id}`, {
-      listItem: listItem
+    url.post(`/${id}/edit`, {
+      listItems: newItemsArray
     })
-      .then(window.location.reload())
+      .then(window.location.replace(`/${id}`))
   }
 
   return (
     <div className="container">
       <h1>{lists.listTitle}</h1>
+        <form method="POST" onSubmit={handleOnSubmit}>
       <ul>
         {lists.listItem ? (
           lists.listItem.map((item) => {
-            return <li>{item}</li>
+            return <input defaultValue={item} placeholder={item}/>
           })) : "no items"}
       </ul>
-
-      <form method="POST" onSubmit={handleOnSubmit}>
-        <div class="mb-3">
-          <label for="listItem" class="form-label">Add item</label>
-          <input onChange={e => setListItem(e.target.value)} type="text" class="form-control" id="listItem" />
-        </div>
 
 
         <button type="submit" class="btn btn-primary">Submit</button>
