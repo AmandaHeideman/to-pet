@@ -28,6 +28,14 @@ const ListPage = () => {
     getAllLists();
   }, []);
 
+  const handleOnDelete = (id) => {
+    console.log(id)
+    url.post('/delete', {
+      id: id
+    })
+      .then(window.location.reload())
+  }
+
   const handleOnSubmit = (e) => {
     e.preventDefault();
 
@@ -43,9 +51,9 @@ const ListPage = () => {
     <div className="container">
       List page
       {lists ? (
-        lists.map((value) => {
+        lists.map((value, key) => {
           return <>
-            <p><Link to={`/${value._id}`} props={value}> {value.listTitle} </Link></p>
+            <p><Link to={`/${value._id}`} props={value}> {value.listTitle} </Link><input value="Delete" onClick={() => handleOnDelete(value._id)} type="button" /></p>
           </>
         })
 

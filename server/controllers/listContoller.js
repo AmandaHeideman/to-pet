@@ -54,10 +54,24 @@ const deleteListItem = async (req, res) => {
   })
 }
 
+const deleteList = async (req, res) => {
+  const id = req.body.id;
+  List.findOneAndDelete({ _id: id }, (err, list) => {
+    if (err) {
+      return console.log(err);
+    } else {
+      return res.status(200).json({
+        title: 'success'
+      });
+    }
+  })
+}
+
 
 module.exports = {
   getAllLists,
   getDetailList,
   addListItem,
-  deleteListItem
+  deleteListItem,
+  deleteList
 };
