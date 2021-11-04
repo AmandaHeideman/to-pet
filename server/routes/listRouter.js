@@ -12,8 +12,8 @@ router.get("/:id", getDetailList);
 
 router.route("/").post((req, res) => {
   const newList = new List({
-    listTitle: 2,
-    listItem: 3
+    listTitle: req.body.title,
+    listItem: req.body.listItem
 
   })
   console.log(newList);

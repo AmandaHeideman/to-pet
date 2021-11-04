@@ -11,6 +11,7 @@ const ListPage = () => {
 
   const [lists, setLists] = useState([]);
   const [listTitle, setListTitle] = useState("");
+  const [listItem, setListItem] = useState([]);
 
   function getAllLists() {
     url.get('/')
@@ -32,7 +33,8 @@ const ListPage = () => {
     console.log(listTitle)
 
     url.post('/', {
-      title: listTitle
+      title: listTitle,
+      listItem: listItem
     })
       .then(res => console.log(res))
   }
@@ -57,6 +59,12 @@ const ListPage = () => {
           <label for="listTitle" class="form-label">Title</label>
           <input onChange={e => setListTitle(e.target.value)} type="text" class="form-control" id="listTitle" />
         </div>
+        <div class="mb-3">
+          <label for="listTitle" class="form-label">Title</label>
+          <input onChange={e => setListTitle(e.target.value)} type="text" class="form-control" id="listTitle" />
+        </div>
+
+
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
 
