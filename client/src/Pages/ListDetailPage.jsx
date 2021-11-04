@@ -4,14 +4,17 @@ import axios from 'axios';
 const url = axios.create({
   baseURL: process.env.API_KEY || 'http://localhost:5000'
 });
+
+
+
 const ListDetailPage = (props) => {
   const id = props.match.params.id;
 
   const [lists, setLists] = useState([]);
   const [listItem, setListItem] = useState([]);
 
-  function getAllLists() { 
-    url.get(`/${id}`) 
+  function getList() {
+    url.get(`/${id}`)
       .then(response => {
         setLists(response.data)
       })
@@ -20,7 +23,7 @@ const ListDetailPage = (props) => {
       })
   }
   useEffect(() => {
-    getAllLists();
+    getList();
   }, []);
 
   const handleOnSubmit = (e) => {
@@ -29,15 +32,15 @@ const ListDetailPage = (props) => {
     url.post(`/${id}`, {
       listItem: listItem
     })
-      .then(res => console.log(res))
+      .then(window.location.reload())
   }
 
   return (
     <div className="container">
       <h1>{lists.listTitle}</h1>
       <ul>
-        {lists.items ? (
-          lists.items.map((item) => {
+        {lists.listItem ? (
+          lists.listItem.map((item) => {
             return <li>{item}</li>
           })) : "no items"}
       </ul>
