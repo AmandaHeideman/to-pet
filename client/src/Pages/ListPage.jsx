@@ -30,7 +30,6 @@ const ListPage = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    console.log(listTitle)
 
     url.post('/', {
       title: listTitle,
@@ -46,7 +45,7 @@ const ListPage = () => {
       {lists ? (
         lists.map((value) => {
           return <>
-            <p><Link to={`/${value._id}`} list={value}> {value.title} </Link></p>
+            <p><Link to={`/${value._id}`} props={value}> {value.listTitle} </Link></p>
           </>
         })
 
@@ -60,8 +59,8 @@ const ListPage = () => {
           <input onChange={e => setListTitle(e.target.value)} type="text" class="form-control" id="listTitle" />
         </div>
         <div class="mb-3">
-          <label for="listTitle" class="form-label">Title</label>
-          <input onChange={e => setListTitle(e.target.value)} type="text" class="form-control" id="listTitle" />
+          <label for="listItem" class="form-label">First item</label>
+          <input onChange={e => setListItem(e.target.value)} type="text" class="form-control" id="listItem" />
         </div>
 
 

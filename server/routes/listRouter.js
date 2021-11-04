@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const { getAllLists, getDetailList } = require('../controllers/lists');
+const { getAllLists, getDetailList, updateList } = require('../controllers/listContoller');
 const mongoose = require('mongoose')
 const List = require('../models/ListModel')
 
 
 router.get("/", getAllLists);
 router.get("/:id", getDetailList);
+router.post("/:id", updateList);
 
 //router.post("/", addList);
 
@@ -29,6 +30,23 @@ router.route("/").post((req, res) => {
     })
   })
 });
+
+/* router.route("/:id").post((req, res) => {
+  const id = req.params._id;
+  const { listItem } = req.body;
+  console.log("update item")
+  try {
+    List.findByIdAndUpdate(
+      id,
+      {
+        $push: { listItem: listItem }
+      }
+    )
+      .catch((err) => res.status(500).json({ msg: err.message }));
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+}) */
 
 
 module.exports = router;

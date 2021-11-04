@@ -19,6 +19,28 @@ const getDetailList = async (req, res) => {
   }
 };
 
+const updateList = async (req, res) => {
+  const id = req.params.id;
+
+}
+
+/* router.route("/:id").post((req, res) => {
+  const id = req.params._id;
+  const { listItem } = req.body;
+  console.log("update item")
+  try {
+    List.findByIdAndUpdate(
+      id,
+      {
+        $push: { listItem: listItem }
+      }
+    )
+      .catch((err) => res.status(500).json({ msg: err.message }));
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+}) */
+
 /* const addList = async (req, res) => {
   try{
     const allLists = await Lists.find();
