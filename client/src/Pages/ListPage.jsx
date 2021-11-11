@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const url = axios.create({
-  baseURL: process.env.REACT_APP_SERVER_URL || "http://localhost:5000",
+  baseURL: process.env.REACT_APP_SERVER_URL
 });
 
 const ListPage = () => {

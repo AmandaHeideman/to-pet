@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const url = axios.create({
-  baseURL: process.env.API_KEY || "http://localhost:5000",
+  baseURL: process.env.REACT_APP_SERVER_URL
 });
 
 const ListDetailPage = (props) => {
@@ -90,7 +90,7 @@ const ListDetailPage = (props) => {
           />
         </div>
         <button type="submit" class="btn btn-primary">
-          Submit
+          Add item
         </button>
       </form>
 
