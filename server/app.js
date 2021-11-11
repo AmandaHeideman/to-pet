@@ -7,7 +7,7 @@ const path = require("path");
 require("dotenv").config();
 
 const app = express();
-//const port = process.env.PORT || 5000;
+const port = 'https://to-pet-server.herokuapp.com/'
 const uri = process.env.MONGODB_URI;
 
 app.use(cors());
@@ -23,8 +23,8 @@ mongoose
   })
   .then(() => console.log("Connected to database"));
 
-/* app.listen(port, () => {
+app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
-}); */
+});
 
 module.exports = app;
