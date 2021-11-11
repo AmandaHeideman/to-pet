@@ -7,7 +7,7 @@ const path = require("path");
 require("dotenv").config();
 
 const app = express();
-const port = 'https://to-pet-server.herokuapp.com/'
+const port = process.env.PORT || 5000;
 const uri = process.env.MONGODB_URI;
 
 app.use(cors());
