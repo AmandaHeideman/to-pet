@@ -1,5 +1,24 @@
 const List = require("../models/ListModel");
 
+const addNewList = async (req, res) => {
+  const newList = new List({
+    listTitle: req.body.title,
+    listItem: req.body.listItem,
+  });
+
+  newList.save((err) => {
+    if (err) {
+      return res.status(400).json({
+        title: "error",
+        error: "Email already in use",
+      });
+    }
+    return res.status(200).json({
+      title: "list successfully added",
+    });
+  });
+};
+
 const getAllLists = async (req, res) => {
   try {
     const allLists = await List.find();
@@ -26,16 +45,15 @@ const addListItem = async (req, res) => {
       return console.log(err);
     } else {
       list.listItem.push(newListItem);
-      list.save(error => {
-        if (error) return console.log(error)
-        //saved
+      list.save((error) => {
+        if (error) return console.log(error);
         return res.status(200).json({
-          title: 'success'
+          title: "success",
         });
       });
     }
-  })
-}
+  });
+};
 
 const deleteListItem = async (req, res) => {
   const index = req.body.index;
@@ -44,42 +62,40 @@ const deleteListItem = async (req, res) => {
       return console.log(err);
     } else {
       list.listItem.splice(index);
-      list.save(error => {
-        if (error) return console.log(error)
+      list.save((error) => {
+        if (error) return console.log(error);
         return res.status(200).json({
-          title: 'success'
+          title: "success",
         });
       });
     }
-  })
-}
+  });
+};
 
 const editList = async (req, res) => {
   const items = req.body.listItems;
   const id = req.params.id;
   try {
-    List.findByIdAndUpdate(
-      id, { listItem: items }
-    )
-      .catch((err) => res.status(500).json({ msg: err.message }));
+    List.findByIdAndUpdate(id, { listItem: items }).catch((err) =>
+      res.status(500).json({ msg: err.message })
+    );
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
-}
+};
 
 const deleteList = async (req, res) => {
   const id = req.body.id;
-  List.findOneAndDelete({ _id: id }, (err, list) => {
+  List.findOneAndDelete({ _id: id }, (err) => {
     if (err) {
       return console.log(err);
     } else {
       return res.status(200).json({
-        title: 'success'
+        title: "success",
       });
     }
-  })
-}
-
+  });
+};
 
 module.exports = {
   getAllLists,
@@ -87,5 +103,6 @@ module.exports = {
   addListItem,
   deleteListItem,
   deleteList,
-  editList
+  editList,
+  addNewList,
 };

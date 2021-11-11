@@ -1,7 +1,7 @@
-import { Switch, Route } from 'react-router-dom';
-import ListPage from './Pages/ListPage';
-import ListDetailPage from './Pages/ListDetailPage';
-import EditListPage from './Pages/EditListPage';
+import { Switch, Route } from "react-router-dom";
+import ListPage from "./Pages/ListPage";
+import ListDetailPage from "./Pages/ListDetailPage";
+import EditListPage from "./Pages/EditListPage";
 
 function App() {
   return (
